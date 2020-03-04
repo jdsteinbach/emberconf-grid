@@ -36,6 +36,7 @@ import config from './.reveal.config'
 
 let {
   title,
+  subtitle,
   description,
   colophonImage,
   colophonAlt,
@@ -249,7 +250,9 @@ const dirToContent = dir => {
   for (let c of contents) {
     c = join(dir, c)
 
-    if (statSync(c).isFile()) {
+    if (basename(c).indexOf('x') === 0) {
+      console.log(`Skip ${basename(c)}`)
+    } else if (statSync(c).isFile()) {
       content += sectionize(fileContents(c))
     } else if (statSync(c).isDirectory()) {
       content += sectionize({body: dirToContent(c)})
@@ -268,6 +271,7 @@ task('content', () => {
   return src('./index.html')
     .pipe(replace(/{{slides}}/gi, content))
     .pipe(replace(/{{title}}/gi, title))
+    .pipe(replace(/{{subtitle}}/gi, subtitle))
     .pipe(replace(/{{description}}/gi, description))
     .pipe(replace(/{{colophonImage}}/gi, colophonImage))
     .pipe(replace(/{{colophonAlt}}/gi, colophonAlt))

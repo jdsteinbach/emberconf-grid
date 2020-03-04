@@ -1,8 +1,8 @@
 {
   "name": "reveal-starter",
   "version": "1.0.0",
-  "description": "A Starter Repo for Reveal.js Decks",
-  "title": "{{Your Title Here}}",
+  "description": "Slide Deck for EmberConf 2020 talk by James Steinbach",
+  "title": "An Ember Dev's Guide to CSS Grid",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

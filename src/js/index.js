@@ -6,7 +6,7 @@ initialize({
   progress: true,
   history: true,
   center: true,
-  width: 800,
+  width: 1024,
   height: 600,
   transition: 'fade'
 });

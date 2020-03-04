@@ -15,12 +15,12 @@ $-secondaryColor: #1e719b;
 
 // Light Colors
 $-mainColor: #131313;
-$-headingColor: mix($-primaryColor, $-mainColor, 75%);
+$-headingColor: mix($-primaryColor, $-mainColor, 95%);
 
 $-backgroundColor: #ececec;
 $-backgroundColorAlt: rgba($-headingColor, .25);
-$-shadowColor: darken($-secondaryColor, 20%);
-$-shadowColorAlt: $-primaryColor;
+$-shadowColor: $-primaryColor;
+$-shadowColorAlt: darken($-secondaryColor, 20%);
 
 $-linkColor: $-secondaryColor;
 $-linkColorHover: darken($-linkColor, 10%);
@@ -265,6 +265,12 @@ body {
     font-size: $heading1Size;
     text-shadow: .5px .5px 0 $shadowColor,
                  1px 1px 0 $shadowColor;
+  }
+
+  em {
+    --font-slnt: 0;
+
+    font-style: normal;
   }
 
   .big-p {

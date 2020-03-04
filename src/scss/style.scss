@@ -3,7 +3,6 @@
 @import "fonts";
 @import "css/reveal.scss";
 @import "custom-theme";
-// @import "code-highlighting";
 
 *,
 ::before,
@@ -13,5 +12,15 @@
 
 .reveal {
   @import "animations";
+  @import "code-highlighting";
+  @import "grid-properties";
+  @import "timeline";
+  @import "data-rows";
+  @import "fr-demo";
+  @import "employee";
+  @import "fr-demo";
+  @import "image-grid";
+  @import "image-grid-2";
+  @import "tilt";
   @import "colophon";
 }

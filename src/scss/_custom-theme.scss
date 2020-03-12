@@ -260,6 +260,10 @@ body {
     code {
       --font-wght: #{$fontWeightNormal};
     }
+
+    a {
+      text-decoration: underline;
+    }
   }
 
   li {

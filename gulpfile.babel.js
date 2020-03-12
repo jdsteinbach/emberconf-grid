@@ -302,9 +302,14 @@ task('images', () => src(`${_srcDir}/images/**/*`)
 )
 
 /**
+ * No jekyll
+ */
+task('nojekyll', () => exec(`touch ${_buildDir}/.nojekyll`))
+
+/**
  * Builds for distribution (staging or production)
  */
-task('build', series('clean', 'fonts', 'images', 'content', 'styles', 'scripts', cb => cb()))
+task('build', series('clean', 'fonts', 'images', 'content', 'styles', 'scripts', 'nojekyll', cb => cb()))
 
 /**
  * Builds assets and reloads the page when any php, html, img or dev files change

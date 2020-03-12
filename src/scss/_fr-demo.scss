@@ -19,7 +19,7 @@
   &::after {
     content: '';
     display: block;
-    color: rgba($backgroundColor, .5);
+    color: $mainColor;
     background-color: currentColor;
     outline: 2px solid currentColor;
     position: relative;
@@ -44,16 +44,17 @@
   margin-bottom: 1rem;
 
   &::before {
-    content: 'Blank Grid'
+    content: "Blank Grid";
   }
 }
 
 .step[data-fragment-index="0"].visible {
   & ~ .fr-label::before {
-    content: 'column-gap: 1rem';
+    content: "column-gap: 1rem";
   }
+
   & ~ .fr-demo {
-    grid-template-columns: 0fr repeat(2, 4px) 0fr;
+    grid-template-columns: 0fr .4% .4% 0fr;
     grid-template-rows: 2px 1fr 2px;
     gap: 0 1rem;
   }
@@ -61,7 +62,7 @@
 
 .step[data-fragment-index="1"].visible {
   & ~ .fr-label::before {
-    content: 'grid-template-columns: 0 50% 25% 0';
+    content: "grid-template-columns: 0 50% 25% 0";
   }
   & ~ .fr-demo {
     grid-template-columns: 0fr 50% 25% 0fr;
@@ -72,7 +73,7 @@
 
 .step[data-fragment-index="2"].visible {
   & ~ .fr-label::before {
-    content: 'grid-template-columns: 1fr 50% 25% 1fr';
+    content: "grid-template-columns: 1fr 50% 25% 1fr";
   }
   & ~ .fr-demo {
     grid-template-columns: 1fr 50% 25% 1fr;
@@ -83,7 +84,7 @@
 
 .step[data-fragment-index="3"].visible {
   & ~ .fr-label::before {
-    content: 'grid-template-rows: 3rem 1fr 3rem';
+    content: "grid-template-rows: 3rem 1fr 3rem";
   }
   & ~ .fr-demo {
     grid-template-columns: 1fr 50% 25% 1fr;
@@ -96,13 +97,13 @@
   grid-area: header;
 
   margin: 0 -2px;
-  background-color: $shadowColorAlt;
+  background-color: $linkColor;
 }
 
 .fr-demo__main {
   grid-area: content;
 
-  background-color: $mainColor;
+  background-color: $linkColorHover;
 }
 
 .fr-demo__aside {
@@ -115,5 +116,5 @@
   grid-area: footer;
 
   margin: 0 -2px;
-  background-color: $headingColor;
+  background-color: $linkColor;
 }

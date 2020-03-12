@@ -1,7 +1,9 @@
 .data-rows {
   max-height: 600px;
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
+  border: 1px solid mix($-shadowColor, $-mainColor);
+  box-shadow:
+    0 .25em 1em -.5em $-shadowColor,
+    0 .0625em .25em -.125em $-shadowColor;
 }
 
 .data-row {
@@ -12,12 +14,12 @@
     "actions status" auto /
     1fr max-content;
   gap: .5rem;
-  background: $mainColor;
-  color: $backgroundColor;
+  color: $-mainColor;
+  background-color: $-backgroundColor;
   text-align: left;
 
   &:not(:first-child) {
-    border-top: 1px solid $shadowColor;
+    border-top: 1px solid $-shadowColor;
   }
 }
 
@@ -37,6 +39,10 @@
 .data-row__actions {
   grid-area: actions;
   font-size: (1em / 1.75);
+
+  a {
+    margin-right: .5em;
+  }
 }
 
 .data-row__status {
@@ -48,15 +54,15 @@
   font-size: (1em / 1.75);
   text-transform: uppercase;
   border-radius: .25rem;
-  background-color: $linkColor;
-  color: $mainColor;
+  background-color: $-linkColor;
+  color: $-backgroundColor;
   justify-self: end;
 
   &--draft {
-    background-color: $codeColor;
+    background-color: $-codeColor;
   }
 
   &--private {
-    background-color: $shadowColorAlt;
+    background-color: $-shadowColor;
   }
 }

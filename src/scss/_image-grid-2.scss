@@ -11,7 +11,11 @@
     "i6 i7 i4 i5" 1fr
     "i6 i8 i8 i9" 1fr/
     1fr 1fr 1fr 1fr;
-  background-color: $mainColor;
+  background-color: $-backgroundColor;
+  border: 1px solid mix($-shadowColor, $-mainColor);
+  box-shadow:
+    0 .25em 1em -.5em $-shadowColor,
+    0 .0625em .25em -.125em $-shadowColor;
 
   span {
     display: flex;

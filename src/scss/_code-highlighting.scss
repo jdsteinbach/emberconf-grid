@@ -90,10 +90,8 @@ offwhite: #EBECF0
 }
 
 .hljs mark {
-  --font-wght: #{$fontWeightBold};
-
   position: relative;
-  color: $-shadowColor;
+  color: $-backgroundColor;
   background-color: transparent;
 
   * {
@@ -107,15 +105,15 @@ offwhite: #EBECF0
     width: calc(100% + .3rem);
     display: block;
     position: absolute;
-    top: .05em;
+    top: -.2em;
     right: -0.15rem;
-    bottom: .05em;
+    bottom: -.2em;
     left: -0.15rem;
     z-index: 0;
-    background-color: $-accentColor;
+    background-color: $linkColor;
   }
 
   &.alt::before {
-    background-color: $linkColor;
+    background-color: $-accentColor;
   }
 }

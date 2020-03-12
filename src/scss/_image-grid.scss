@@ -14,15 +14,20 @@
     "g30  g9  g8  g7  g6  g5 g22" 1fr
     "g29 g28 g27 g26 g25 g24 g23" 1fr /
      1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  background-color: $mainColor;
+  background-color: $-backgroundColor;
+  border: 1px solid mix($-shadowColor, $-mainColor);
+  box-shadow:
+    0 .25em 1em -.5em $-shadowColor,
+    0 .0625em .25em -.125em $-shadowColor;
 
   span {
+    --font-wght: #{$fontWeightBold};
+
     display: flex;
     justify-content: center;
     align-items: center;
-    font-weight: bold;
-    font-variation-settings: "wght" $fontWeightBold;
-    text-shadow: 0 1px 2px $backgroundColor;
+    color: $-backgroundColor;
+    text-shadow: 0 1px 2px $-shadowColorAlt;
     background-position: center;
     background-size: cover;
 

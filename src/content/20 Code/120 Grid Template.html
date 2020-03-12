@@ -2,8 +2,8 @@
 <p class="fragment">Assign rows, columns, and areas</p>
 <pre class="fragment"><code class="css">.grid {
   grid-template:
-    "header header"  auto
-    "body   sidebar" auto
-    "footer footer"  auto /
-     40em   20em;
+    "header header header  header" auto
+    ".      body   sidebar .     " auto
+    "footer footer footer  footer" auto /
+     1fr    40em   20em    1fr;
 }</code></pre>

@@ -20,7 +20,7 @@ $-headingColor: mix($-primaryColor, $-mainColor, 95%);
 $-backgroundColor: #ececec;
 $-backgroundColorAlt: rgba($-headingColor, .25);
 $-shadowColor: $-primaryColor;
-$-shadowColorAlt: darken($-secondaryColor, 20%);
+$-shadowColorAlt: $-mainColor;
 
 $-linkColor: $-secondaryColor;
 $-linkColorHover: darken($-linkColor, 10%);
@@ -35,8 +35,8 @@ $-headingColor--dark: mix($-primaryColor, $-mainColor--dark, 75%);
 
 $-backgroundColor--dark: #131313;
 $-backgroundColorAlt--dark: rgba($-headingColor--dark, .25);
-$-shadowColor--dark: darken($-secondaryColor, 20%);
-$-shadowColorAlt--dark: $-primaryColor;
+$-shadowColorAlt--dark: darken($-secondaryColor, 20%);
+$-shadowColor--dark: $-primaryColor;
 
 $-linkColor--dark: lighten($-secondaryColor, 30%);
 $-linkColorHover--dark: lighten($-linkColor--dark, 10%);
@@ -61,6 +61,8 @@ $-codeColor--dark: mix($-shadowColor--dark, $-mainColor--dark, 25%);
   --accentColor: #{$-accentColor};
   --codeColor: #{$-codeColor};
 
+  --dyColor: #000;
+
   @media (prefers-color-scheme: dark) {
     --mainColor: #{$-mainColor--dark};
     --headingColor: #{$-headingColor--dark};
@@ -76,6 +78,8 @@ $-codeColor--dark: mix($-shadowColor--dark, $-mainColor--dark, 25%);
 
     --accentColor: #{$-accentColor--dark};
     --codeColor: #{$-codeColor--dark};
+
+    --dyColor: #fff;
   }
 }
 
@@ -116,7 +120,9 @@ $fontWeightBold: 700;
 $blockMargin: $mainFontSize / 1.5;
 $headingMargin: 0 0 $blockMargin;
 
-* {
+*,
+::before,
+::after  {
   font-variation-settings:
     "MONO" var(--font-mono, 0),
     "CASL" var(--font-casl, 0),
@@ -158,29 +164,38 @@ body {
   h1,
   h2,
   h3 {
-    --text-shadow-color: #{$shadowColor};
+    --text-shadow-color: #{$shadowColorAlt};
 
-    text-shadow: .5px .5px 0 var(--text-shadow-color),
-                 1px 1px 0 var(--text-shadow-color),
-                 1.5px 1.5px 0 var(--text-shadow-color),
-                 2px 2px 0 var(--text-shadow-color);
+    &,
+    em {
+      text-shadow: .5px .5px 0 var(--text-shadow-color),
+                  1px 1px 0 var(--text-shadow-color),
+                  1.5px 1.5px 0 var(--text-shadow-color),
+                  2px 2px 0 var(--text-shadow-color);
+    }
   }
 
   h1 {
     --font-wght: #{$fontWeightBold};
 
     margin: 0;
+
+    em {
+      --text-shadow-color: #{$shadowColor};
+
+      color: $mainColor;
+    }
   }
 
   h2 {
     --font-wght: #{$fontWeightNormal};
-    --text-shadow-color: #{$shadowColorAlt};
+    --text-shadow-color: #{$shadowColor};
 
     color: $mainColor;
 
     em {
       --font-wght: #{$fontWeightBold};
-      --text-shadow-color: #{$shadowColor};
+      --text-shadow-color: #{$shadowColorAlt};
 
       color: $headingColor;
     }
@@ -190,11 +205,12 @@ body {
     }
   }
 
-  h1,
   h3 {
+    --font-wght: #{$fontWeightNormal};
+
     em {
       --font-wght: #{$fontWeightBold};
-      --text-shadow-color: #{$shadowColorAlt};
+      --text-shadow-color: #{$shadowColor};
 
       color: $mainColor;
     }
@@ -236,9 +252,13 @@ body {
     text-align: center;
 
     em {
-      --font-wght: #{$fontWeightNormal};
+      --font-wght: #{$fontWeightBold};
 
       color: $accentColor;
+    }
+
+    code {
+      --font-wght: #{$fontWeightNormal};
     }
   }
 
@@ -293,14 +313,17 @@ body {
 
   code {
     --font-mono: 1;
+    --font-wght: #{$fontWeightNormal};
 
     font-family: $codeFont;
     color: $codeColor;
-    font-weight: 400;
 
     &::before,
     &::after {
+      --font-wght: #{$fontWeightLight};
+
       content: '`';
+      opacity: 0.6;
     }
 
     mark {

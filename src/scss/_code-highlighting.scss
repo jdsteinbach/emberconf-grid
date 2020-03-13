@@ -20,7 +20,7 @@ offwhite: #EBECF0
   display: block;
   overflow-x: auto;
   padding: 0.5em;
-  background: rgba($-shadowColorAlt, .25);
+  background: rgba($-shadowColor, .25);
   color: $mainColor;
 }
 
@@ -110,10 +110,10 @@ offwhite: #EBECF0
     bottom: -.2em;
     left: -0.15rem;
     z-index: 0;
-    background-color: $linkColor;
+    background-color: $-linkColorHover;
   }
 
   &.alt::before {
-    background-color: $-accentColor;
+    background-color: $shadowColor;
   }
 }

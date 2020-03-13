@@ -1,0 +1,50 @@
+.row-code {
+  margin: 0 0 1rem;
+  padding: 0.25ch;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: repeat(auto-fit, min-content);
+  gap: .25ch;
+  justify-content: start;
+  align-content: start;
+  align-self: start;
+  position: relative;
+
+  span {
+    padding: .25ch;
+  }
+
+  &::before,
+  &::after {
+    display: none;
+  }
+
+  &:not(.override) > .preoverride,
+  &.override > span:not(.preoverride) {
+    display: none;
+  }
+}
+
+.fragment.visible + .row-code {
+  grid-auto-flow: row;
+  grid-template-rows: var(--rows);
+  grid-template-columns: 1fr;
+  outline: .25ch solid $linkColor;
+
+  span {
+    background-color: $shadowColorAlt;
+    text-shadow: 0 1px 2px $shadowColorAlt;
+
+    &:nth-child(even) {
+      background-color: $shadowColor;
+    }
+
+    &.preoverride {
+      display: none;
+    }
+
+    &:not(.preoverride) {
+      display: inline;
+    }
+  }
+}

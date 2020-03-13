@@ -17,11 +17,14 @@
     0 .25em 1em -.5em $-shadowColor,
     0 .0625em .25em -.125em $-shadowColor;
 
-  span {
+  > span {
+    --font-wght: #{$fontWeightBold};
+
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 0;
+    color: $-backgroundColor;
+    text-shadow: 0 1px 2px $-shadowColorAlt;
     background-position: center;
     background-size: cover;
 
@@ -34,4 +37,11 @@
       }
     }
   }
+}
+
+.image-grid__inner {
+  display: grid !important;
+  grid-template-columns: repeat(var(--colspan, 1), 1fr);
+  grid-template-rows: repeat(var(--rowspan, 1), 1fr);
+  gap: inherit;
 }

@@ -339,7 +339,8 @@ task('watch', series('build', () => {
     series('content')
   )
   watch(
-    './index.html'
+    './index.html',
+    series('content')
   ).on('change', reload)
 }))
 

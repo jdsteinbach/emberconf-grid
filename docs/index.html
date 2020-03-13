@@ -10,7 +10,7 @@
   </head>
   <body>
     <div class="reveal">
-      <div class="slides">
+      <div class="slides" id="slides">
         <section><section><h1 class="v-tilt v-tilt--large big">An Ember Dev&apos;s<br>Guide to<br><em><span class="small-caps">CSS</span> Grid</em></h1>
 </section><section><h2>Grid gives us</h2>
 <ul>
@@ -75,18 +75,17 @@
 </section><section data-background="images/easy-road.jpg"></section></section><section><section><div class="v-tilt v-tilt--large">
   <h2 class="big"><em>Grid</em><br>The Short,<br>Happy Path</h2>
 </div>
-</section><section><pre><code class="language-css">.site {
+</section><section><pre><code class="language-css" data-no-escape>.site {
   display: grid;
   grid-template-columns:
     1fr minmax(65%, 40em)
       minmax(35%, 20em) 1fr;
   grid-template-areas:
-    &quot;header header  header  header&quot;
-    &quot;  .    content sidebar    .  &quot;
-    &quot;footer footer  footer  footer&quot;;
+    "<mark class="alt">header header  header  header</mark>"
+    "  .    content sidebar    .  "
+    "<mark>footer footer  footer  footer</mark>";
   gap: 12px 16px;
-}
-</code></pre>
+}</code></pre>
 </section><section><pre><code class="language-css">.site__header {
   grid-area: header;
 }
@@ -104,17 +103,20 @@
 </section><section><h4><code>grid-template-columns</code></h4>
 <p class="fragment">Set the pro­por­tions for tracks along the <em>in­line axis</em> of the grid con­tainer</p>
 <p class="fragment">Value: a se­ries of valid length val­ues</p>
-<ul class="fragment">
-  <li class="fragment"><code>1fr 50em 35em 1fr</code></li>
-  <li class="fragment"><code>30% 150px 30%</code></li>
-</ul>
+</section><section><div></div>
+<column-code>1fr 12em 8em 1fr</column-code>
+<column-code>30% 150px 30%</column-code>
 </section><section><h4><code>grid-template-rows</code></h4>
 <p class="fragment">Set the pro­por­tions for tracks along the <em>block axis</em> of the grid con­tainer</p>
 <p class="fragment">Value: a se­ries of valid length val­ues</p>
-<ul class="fragment">
-  <li class="fragment"><code>1fr 2fr</code></li>
-  <li class="fragment"><code>50px repeat(10, 100px)</code></li>
-</ul>
+</section><section><div style="min-height:30rem">
+  <div class="fragment"></div>
+  <row-code>1fr 2fr</row-code>
+</div>
+</section><section><div style="min-height:30rem">
+  <div class="fragment"></div>
+  <row-code override="50px 100px 100px 100px 100px 100px 100px 100px 100px 100px 100px">50px re­peat(10, 100px)</row-code>
+</div>
 </section><section><h4><em><span class="small-caps">🚨</span> Warning: Fixed Heights <span class="small-caps">🚨</span></em></h4>
 <p>Fixed heights =&gt; over­ﬂow</p>
 <p>Flexible row height val­ues: <code>auto</code>, <code>min-content</code>, <code>max-content</code></p>
@@ -125,13 +127,12 @@
 <li class="fragment"><code>.</code> cre­ates a<span class="push-double"></span> <span class="pull-double">“</span>blank” area</li>
 </ul>
 </section><section><h4><code>grid-template-areas</code></h4>
-<pre><code class="language-css">.grid {
+<pre><code class="language-css" data-no-escape>.grid {
   grid-template-areas:
-    &quot;header header header  header&quot;
-    &quot;.      body   sidebar .     &quot;
-    &quot;footer footer footer  footer&quot;;
-}
-</code></pre>
+    "<mark class="alt">header header header  header</mark>"
+    ".      body   sidebar .     "
+    "<mark>footer footer footer  footer</mark>";
+}</code></pre>
 </section><section><h4><code>grid-template-areas</code></h4>
 <pre><code class="language-css">.grid {
   grid-template-areas:
@@ -148,9 +149,9 @@
 <p class="fragment">Assign rows, columns, and ar­eas</p>
 <pre class="fragment"><code class="css">.grid {
   grid-template:
-    "header header header  header" auto
+    "<mark class="alt">header header header  header</mark>" auto
     ".      body   sidebar .     " auto
-    "footer footer footer  footer" auto /
+    "<mark>footer footer footer  footer</mark>" auto /
      1fr    40em   20em    1fr;
 }</code></pre>
 </section><section><h4><code>gap</code></h4>
@@ -165,9 +166,10 @@
 <p class="fragment">One<span class="push-double"></span> <span class="pull-double">&ldquo;</span><span class="t-emphasis">fr</span>ac­tion&rdquo; of the grid&rsquo;s <span class="t-emphasis">fr</span>ee space</p>
 <p class="fragment">Calculated af­ter non-<code>fr</code><br>space is used</p>
 <p class="fragment">Based on to­tal num­ber of <code>fr</code><br>in the row or col­umn</p>
-</section><section><p><code>300px 1fr</code></p>
-<p class="fragment"><code>1fr 50em 25em 1fr</code></p>
-<p class="fragment"><code>1fr 2fr 3fr</code></p>
+</section><section><div></div>
+<column-code>300px 1fr</column-code>
+<column-code>1fr 12em 8em 1fr</column-code>
+<column-code>1fr 2fr 3fr</column-code>
 </section><section><p class="step fragment"></p>
 <p class="step fragment"></p>
 <p class="step fragment"></p>
@@ -182,7 +184,7 @@
 </section><section><h4><code>repeat()</code></h4>
 <p class="fragment">Repeats a cer­tain value a spec­i­ﬁed num­ber of times</p>
 <p class="fragment"><code>repeat(&lt;count&gt;, &lt;length&gt;)</code></p>
-<p class="fragment"><code>repeat(12, 1fr)</code></p>
+<column-code class="fragment" override="1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr">re­peat(12, 1fr)</column-code>
 </section><section><h3 class="big v-tilt v-tilt--large">Grid<br><em>Child</em><br><em>Properties</em></h3>
 </section><section><h4><code>grid-area</code></h4>
 <p class="fragment">Values:</p>
@@ -357,42 +359,30 @@
 }
 
 </code></pre>
-</section><section><p class="step flip-trigger fragment"></p>
-<p class="step flip-trigger fragment"></p>
-<p class="step flip-trigger fragment"></p>
-<div class="employee" id="flip-parent">
-  <div class="employee__photo" data-flip-key="photo">
-    <img src="http://i.pravatar.cc/400?img=49" alt>
-  </div>
-  <header class="employee__header">
-    <div class="employee__title">Rita Matthews</div>
-    <div class="employee__subtitle">District Manager</div>
-    <div class="employee__contact">
-      <a href>rita.matthews@ex­am­ple.com</a>
-      <span>(555) 555-6789</span>
-    </div>
-  </header>
-  <div class="employee__bio">Rita has been man­ag­ing this dis­trict for 3 years. When she’s not work­ing, she spends time on a bunch of cool hob­bies.</div>
-  <div class="employee__awards">
-    <div class="awards-title">Awards</div>
-    <li class="award">Highest Revenue Increase</li>
-    <li class="award">Most Exciting Screensaver</li>
-    <li class="award">Coolest Hobbies</li>
-    <li class="award">Best Voicemail Message</li>
-    <li class="award">Strongest Team Player</li>
-    <li class="award">Most Reﬂective Sunglasses</li>
-  </div>
-</div>
 </section><section><div class="image-grid-2">
-  <span>1</span>
-  <span>2</span>
-  <span>3</span>
-  <span>4</span>
-  <span>5</span>
-  <span>6</span>
-  <span>7</span>
-  <span>8</span>
-  <span>9</span>
+  <span class="image-grid__inner" style="--rowspan:2;--colspan:2">
+    <span>i1</span>
+    <span>i1</span>
+    <span>i1</span>
+    <span>i1</span>
+  </span>
+  <span>i2</span>
+  <span class="image-grid__inner" style="--rowspan:2">
+    <span>i3</span>
+    <span>i3</span>
+  </span>
+  <span class="image-grid__inner" style="--rowspan:2">
+    <span>i4</span>
+    <span>i4</span></span>
+  <span>i5</span>
+  <span class="image-grid__inner" style="--rowspan:2">
+    <span>i6</span>
+    <span>i6</span></span>
+  <span>i7</span>
+  <span class="image-grid__inner" style="--colspan:2">
+    <span>i8</span>
+    <span>i8</span></span>
+  <span>i9</span>
 </div>
 </section><section><pre><code class="language-css" data-no-escape>.image-grid {
   grid-template:
@@ -404,47 +394,57 @@
   gap: 10px;
 }</code></pre>
 </section><section><div class="image-grid">
-  <span>1</span>
-  <span>2</span>
-  <span>3</span>
-  <span>4</span>
-  <span>5</span>
-  <span>6</span>
-  <span>7</span>
-  <span>8</span>
-  <span>9</span>
-  <span>10</span>
-  <span>11</span>
-  <span>12</span>
-  <span>13</span>
-  <span>14</span>
-  <span>15</span>
-  <span>16</span>
-  <span>17</span>
-  <span>18</span>
-  <span>19</span>
-  <span>20</span>
-  <span>21</span>
-  <span>22</span>
-  <span>23</span>
-  <span>24</span>
-  <span>25</span>
-  <span>26</span>
-  <span>27</span>
-  <span>28</span>
-  <span>29</span>
-  <span>30</span>
-  <span>31</span>
-  <span>32</span>
-  <span>33</span>
-  <span>34</span>
-  <span>35</span>
-  <span>36</span>
-  <span>37</span>
-  <span>38</span>
-  <span>39</span>
-  <span>40</span>
-  <span>41</span>
+  <span class="image-grid__center">
+    <span>i1</span>
+    <span>i1</span>
+    <span>i1</span>
+    <span>i1</span>
+    <span>i1</span>
+    <span>i1</span>
+    <span>i1</span>
+    <span>i1</span>
+    <span>i1</span>
+  </span>
+  <span>i2</span>
+  <span>i3</span>
+  <span>i4</span>
+  <span>i5</span>
+  <span>i6</span>
+  <span>i7</span>
+  <span>i8</span>
+  <span>i9</span>
+  <span>i10</span>
+  <span>i11</span>
+  <span>i12</span>
+  <span>i13</span>
+  <span>i14</span>
+  <span>i15</span>
+  <span>i16</span>
+  <span>i17</span>
+  <span>i18</span>
+  <span>i19</span>
+  <span>i20</span>
+  <span>i21</span>
+  <span>i22</span>
+  <span>i23</span>
+  <span>i24</span>
+  <span>i25</span>
+  <span>i26</span>
+  <span>i27</span>
+  <span>i28</span>
+  <span>i29</span>
+  <span>i30</span>
+  <span>i31</span>
+  <span>i32</span>
+  <span>i33</span>
+  <span>i34</span>
+  <span>i35</span>
+  <span>i36</span>
+  <span>i37</span>
+  <span>i38</span>
+  <span>i39</span>
+  <span>i40</span>
+  <span>i41</span>
 </div>
 </section><section><pre><code class="language-css" data-no-escape>.image-grid {
   grid-template:
@@ -489,6 +489,110 @@ not its in­trin­sic as­pect ra­tio</p>
       </div>
     </div>
 
+    <script src="//cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script type="text/javascript" src="./index.min.js"></script>
+    <script>
+      Vue.component('column-code', {
+        data() {
+          return {
+            mo: Object,
+            illustrated: false
+          }
+        },
+        props: {
+          override: {
+            type: String,
+            default: ''
+          }
+        },
+        computed: {
+          templateColumns() {
+            return this.override || this.$slots.default[0].text
+          },
+          columns() {
+            if (!this.templateColumns) {
+              return '<span>No Content Available</span>'
+            }
+            return this.templateColumns.split(' ')
+          },
+          columnStyle() {
+            return {
+              '--columns': this.templateColumns
+            }
+          },
+          classes() {
+            return {
+              illustrated: this.illustrated,
+              override: this.override,
+              visible: this.illustrated
+            }
+          }
+        },
+        methods: {
+          illustrate() {
+            this.illustrated = true
+          }
+        },
+        mounted() {
+          console.log(this.$refs.root)
+
+          if (!this.$refs.root) return
+
+          const component = this
+
+          this.mo = new MutationObserver(mutations => {
+            mutations.forEach(m => {
+              if (m.type === 'attributes') {
+                if (m.target.classList.contains('visible')) {
+                  setTimeout(component.illustrate, 2000)
+                }
+              }
+            })
+          })
+
+          this.mo.observe(this.$refs.root, {attributes: true})
+        },
+        destroyed() {
+          if (!this.$refs.root) return
+          if (this.mo) return
+
+          this.mo.disconnect()
+        },
+        template: '<code ref="root" class="column-code fragment" :class="{override: override, illustrated: illustrated}" :style="columnStyle"><span class="preoverride"><slot/></span><span v-for="(col, i) in columns" :key="`${i}-${col}`" :data-key="`${i}-${col}`">{{col}}</span></code>'
+      })
+
+      Vue.component('row-code', {
+        data() {
+          return {}
+        },
+        props: {
+          override: {
+            type: String,
+            default: ''
+          }
+        },
+        computed: {
+          templateRows() {
+            return this.override || this.$slots.default[0].text
+          },
+          rows() {
+            if (!this.templateRows) {
+              return '<span>No Content Available</span>'
+            }
+            return this.templateRows.split(' ')
+          },
+          rowStyle() {
+            return {
+              '--rows': this.templateRows
+            }
+          }
+        },
+        template: '<code class="row-code" :class="{override: override}" :style="rowStyle"><span class="preoverride"><slot/></span><span v-for="(row, i) in rows" :key="`${i}-${row}`" :data-key="`${i}-${row}`">{{row}}</span></code>'
+      })
+
+      new Vue({
+        el: '#slides'
+      })
+    </script>
   </body>
 </html>

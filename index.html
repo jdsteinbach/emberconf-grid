@@ -10,7 +10,7 @@
   </head>
   <body>
     <div class="reveal">
-      <div class="slides">
+      <div class="slides" id="slides">
         {{slides}}
       </div>
 
@@ -20,6 +20,110 @@
       </div>
     </div>
 
+    <script src="//cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script type="text/javascript" src="./index.js"></script>
+    <script>
+      Vue.component('column-code', {
+        data() {
+          return {
+            mo: Object,
+            illustrated: false
+          }
+        },
+        props: {
+          override: {
+            type: String,
+            default: ''
+          }
+        },
+        computed: {
+          templateColumns() {
+            return this.override || this.$slots.default[0].text
+          },
+          columns() {
+            if (!this.templateColumns) {
+              return '<span>No Content Available</span>'
+            }
+            return this.templateColumns.split(' ')
+          },
+          columnStyle() {
+            return {
+              '--columns': this.templateColumns
+            }
+          },
+          classes() {
+            return {
+              illustrated: this.illustrated,
+              override: this.override,
+              visible: this.illustrated
+            }
+          }
+        },
+        methods: {
+          illustrate() {
+            this.illustrated = true
+          }
+        },
+        mounted() {
+          console.log(this.$refs.root)
+
+          if (!this.$refs.root) return
+
+          const component = this
+
+          this.mo = new MutationObserver(mutations => {
+            mutations.forEach(m => {
+              if (m.type === 'attributes') {
+                if (m.target.classList.contains('visible')) {
+                  setTimeout(component.illustrate, 2000)
+                }
+              }
+            })
+          })
+
+          this.mo.observe(this.$refs.root, {attributes: true})
+        },
+        destroyed() {
+          if (!this.$refs.root) return
+          if (this.mo) return
+
+          this.mo.disconnect()
+        },
+        template: '<code ref="root" class="column-code fragment" :class="{override: override, illustrated: illustrated}" :style="columnStyle"><span class="preoverride"><slot/></span><span v-for="(col, i) in columns" :key="`${i}-${col}`" :data-key="`${i}-${col}`">{{col}}</span></code>'
+      })
+
+      Vue.component('row-code', {
+        data() {
+          return {}
+        },
+        props: {
+          override: {
+            type: String,
+            default: ''
+          }
+        },
+        computed: {
+          templateRows() {
+            return this.override || this.$slots.default[0].text
+          },
+          rows() {
+            if (!this.templateRows) {
+              return '<span>No Content Available</span>'
+            }
+            return this.templateRows.split(' ')
+          },
+          rowStyle() {
+            return {
+              '--rows': this.templateRows
+            }
+          }
+        },
+        template: '<code class="row-code" :class="{override: override}" :style="rowStyle"><span class="preoverride"><slot/></span><span v-for="(row, i) in rows" :key="`${i}-${row}`" :data-key="`${i}-${row}`">{{row}}</span></code>'
+      })
+
+      new Vue({
+        el: '#slides'
+      })
+    </script>
   </body>
 </html>

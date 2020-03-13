@@ -20,7 +20,7 @@
     0 .25em 1em -.5em $-shadowColor,
     0 .0625em .25em -.125em $-shadowColor;
 
-  span {
+  > span {
     --font-wght: #{$fontWeightBold};
 
     display: flex;
@@ -40,4 +40,11 @@
       }
     }
   }
+}
+
+.image-grid__center {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: inherit;
 }

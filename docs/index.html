@@ -77,9 +77,7 @@
 </div>
 </section><section><pre><code class="language-css" data-no-escape>.site {
   display: grid;
-  grid-template-columns:
-    1fr minmax(65%, 40em)
-      minmax(35%, 20em) 1fr;
+  grid-template-columns: 1fr 40em 20em 1fr;
   grid-template-areas:
     "<mark class="alt">header header  header  header</mark>"
     "  .    content sidebar    .  "
@@ -106,6 +104,27 @@
 </section><section><div></div>
 <column-code>1fr 12em 8em 1fr</column-code>
 <column-code>30% 150px 30%</column-code>
+</section><section><div class="language-grid">
+  <div class="language-grid__a"></div>
+  <div class="language-grid__b"></div>
+  <div class="language-grid__c"></div>
+  <div class="language-grid__d"></div>
+  <div class="language-grid__e"></div>
+</div>
+</section><section><div class="language-grid" dir="rtl">
+  <div class="language-grid__a"></div>
+  <div class="language-grid__b"></div>
+  <div class="language-grid__c"></div>
+  <div class="language-grid__d"></div>
+  <div class="language-grid__e"></div>
+</div>
+</section><section><div class="language-grid" style="writing-mode:vertical-lr">
+  <div class="language-grid__a"></div>
+  <div class="language-grid__b"></div>
+  <div class="language-grid__c"></div>
+  <div class="language-grid__d"></div>
+  <div class="language-grid__e"></div>
+</div>
 </section><section><h4><code>grid-template-rows</code></h4>
 <p class="fragment">Set the pro­por­tions for tracks along the <em>block axis</em> of the grid con­tainer</p>
 <p class="fragment">Value: a se­ries of valid length val­ues</p>
@@ -195,6 +214,11 @@
   <span class="a-blast-in fragment">You know<br>Grid!</span>
 </h3>
 </section></section><section><section><h2 class="big v-tilt v-tilt--large"><em>Practical</em><br>Grid<br><em>Examples</em></h2>
+</section><section><div class="centered">
+  <pre class="centered__div"><code class="language-css" data-no-escape>display: grid;
+justify-content: center;
+align-items: center;</code></pre>
+</div>
 </section><section><div class="data-rows">
   <div class="data-row">
     <div class="data-row__title">Sample Post Title</div>
@@ -287,8 +311,7 @@
     "bio   <mark class="alt">awards</mark>" auto /
      30%   1fr;
   gap: 1rem 3rem;
-}
-</code></pre>
+}</code></pre>
 </section><section><div class="employee employee--2">
   <div class="employee__photo">
     <img src="http://i.pravatar.cc/400?img=49" alt>
@@ -318,9 +341,8 @@
     "<mark>bio    bio   </mark>" auto
     "<mark class="alt">awards awards</mark>" auto /
      150px  1fr;
-    gap: 1rem;
-}
-</code></pre>
+  gap: 1rem;
+}</code></pre>
 </section><section><div class="employee employee--3">
   <div class="employee__photo">
     <img src="http://i.pravatar.cc/400?img=49" alt>
@@ -355,7 +377,6 @@
 .employee__bio {
   display: none;
 }
-
 </code></pre>
 </section><section><div class="image-grid-2">
   <span class="image-grid__inner" style="--rowspan:2;--colspan:2">

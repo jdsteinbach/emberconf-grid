@@ -25,10 +25,7 @@
     <script>
       Vue.component('column-code', {
         data() {
-          return {
-            mo: Object,
-            illustrated: false
-          }
+          return {}
         },
         props: {
           override: {
@@ -50,46 +47,9 @@
             return {
               '--columns': this.templateColumns
             }
-          },
-          classes() {
-            return {
-              illustrated: this.illustrated,
-              override: this.override,
-              visible: this.illustrated
-            }
           }
         },
-        methods: {
-          illustrate() {
-            this.illustrated = true
-          }
-        },
-        mounted() {
-          console.log(this.$refs.root)
-
-          if (!this.$refs.root) return
-
-          const component = this
-
-          this.mo = new MutationObserver(mutations => {
-            mutations.forEach(m => {
-              if (m.type === 'attributes') {
-                if (m.target.classList.contains('visible')) {
-                  setTimeout(component.illustrate, 2000)
-                }
-              }
-            })
-          })
-
-          this.mo.observe(this.$refs.root, {attributes: true})
-        },
-        destroyed() {
-          if (!this.$refs.root) return
-          if (this.mo) return
-
-          this.mo.disconnect()
-        },
-        template: '<code ref="root" class="column-code fragment" :class="{override: override, illustrated: illustrated}" :style="columnStyle"><span class="preoverride"><slot/></span><span v-for="(col, i) in columns" :key="`${i}-${col}`" :data-key="`${i}-${col}`">{{col}}</span></code>'
+        template: '<code class="column-code fragment" :class="{override: override}" :style="columnStyle"><span v-if="override" class="preoverride"><slot/></span><span v-for="(col, i) in columns" :key="`${i}-${col}`" :data-key="`${i}-${col}`">{{col}}</span></code>'
       })
 
       Vue.component('row-code', {
@@ -110,15 +70,34 @@
             if (!this.templateRows) {
               return '<span>No Content Available</span>'
             }
-            return this.templateRows.split(' ')
+            const splitRows = this.templateRows.split(' ')
+            const outputRows = []
+            splitRows.map(r => {
+              if (r.indexOf('r') === 0) {
+                r = r.replace('&nbsp;', ' ')
+                const matches = r.match(/\((.*?),/)
+                console.log(r, matches)
+                const [ original, count ] = matches
+                for(let i = 0; i < count; i++) {
+                  if (i === 0) {
+                    outputRows.push(r)
+                  } else {
+                    outputRows.push('')
+                  }
+                }
+              } else {
+                outputRows.push(r)
+              }
+            })
+            return outputRows
           },
           rowStyle() {
             return {
-              '--rows': this.templateRows
+              '--rows': this.templateRows.replace('&nbsp;', ' ')
             }
           }
         },
-        template: '<code class="row-code" :class="{override: override}" :style="rowStyle"><span class="preoverride"><slot/></span><span v-for="(row, i) in rows" :key="`${i}-${row}`" :data-key="`${i}-${row}`">{{row}}</span></code>'
+        template: '<code class="row-code fragment" :style="rowStyle"><span v-for="(row, i) in rows" :key="`${i}-${row}`" :data-key="`${i}-${row}`">{{row}}</span></code>'
       })
 
       new Vue({

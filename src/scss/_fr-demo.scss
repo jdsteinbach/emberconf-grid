@@ -10,7 +10,7 @@
     "before content sidebar after"
     "footer footer  footer  footer";
   gap: 0;
-  transition: grid-template-columns .5s ease-in-out, grid-template-rows .5s ease-in-out, gap .5s ease-in-out;
+  transition: grid-template-columns .5s ease-in-out, grid-template-rows .5s ease-in-out, gap .5s ease-in-out !important;
   font-size: 0;
   overflow: hidden;
   background: $shadowColor;

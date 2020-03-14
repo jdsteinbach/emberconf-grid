@@ -227,7 +227,7 @@ const sectionize = file => `<section ${jsonToAttrs(file.attributes)}>${file.body
 const filename = file => basename(file, extname(file))
 
 const fileContents = file => {
-  const ext = extname(file)
+  const isMd = extname(file) === '.md'
   const contents = readFileSync(file).toString()
   let fileContents
 
@@ -235,7 +235,7 @@ const fileContents = file => {
 
   fileContents = {
     attributes: attributes,
-    body: md.render(body)
+    body: isMd ? md.render(body) : body
   }
 
   return fileContents
@@ -277,7 +277,6 @@ task('content', () => {
     .pipe(replace(/{{colophonAlt}}/gi, colophonAlt))
     .pipe(replace(/{{colophonURL}}/gi, colophonURL))
     .pipe(replace(/{{colophonShortURL}}/gi, colophonShortURL))
-    .pipe(replace(/<li>/gi, '<li class="fragment">'))
     .pipe(gulpif(PROD, replace(/style.css/gi, 'style.min.css')))
     .pipe(gulpif(PROD, replace(/index.js/gi, 'index.min.js')))
     .pipe(dest(_buildDir))

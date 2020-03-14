@@ -14,16 +14,11 @@
         <section><section><h1 class="v-tilt v-tilt--large big">An Ember Dev&apos;s<br>Guide to<br><em><span class="small-caps">CSS</span> Grid</em></h1>
 </section><section><h2>Grid gives us</h2>
 <ul>
-<li class="fragment">a re­spon­sive CSS-only lay­out method</li>
-<li class="fragment">that re­quires only <code>grid</code> styles,</li>
-<li class="fragment">al­lows col­umn/​​row/​​gap con­trol, and</li>
-<li class="fragment">can put chil­dren at any col­umn/​​row po­si­tion</li>
+<li>a re­spon­sive CSS-only lay­out method</li>
+<li>that re­quires only <code>grid</code> styles,</li>
+<li>al­lows col­umn/​​row/​​gap con­trol, and</li>
+<li>can put chil­dren at any col­umn/​​row po­si­tion</li>
 </ul>
-</section><section><h2 class="big v-tilt v-tilt--large" data-autoslide="0">
-  <span class="fragment d-block a-blast-in" data-autoslide="500"><span class="small-caps">CSS</span></span>
-  <em class="fragment d-block a-blast-in a-blast-in--big" data-autoslide="500"><span class="small-caps">GRID</span></em>
-  <span class="fragment d-block a-blast-in"><span class="small-caps">FTW</span></span>
-</h2>
 </section><section><h3>Grid Properties &amp; Values</h3>
 <div class="grid-properties grid-properties--small">
 <p><code>grid-template-columns</code></p>
@@ -102,29 +97,8 @@
 <p class="fragment">Set the pro­por­tions for tracks along the <em>in­line axis</em> of the grid con­tainer</p>
 <p class="fragment">Value: a se­ries of valid length val­ues</p>
 </section><section><div></div>
-<column-code>1fr 12em 8em 1fr</column-code>
 <column-code>30% 150px 30%</column-code>
-</section><section><div class="language-grid">
-  <div class="language-grid__a"></div>
-  <div class="language-grid__b"></div>
-  <div class="language-grid__c"></div>
-  <div class="language-grid__d"></div>
-  <div class="language-grid__e"></div>
-</div>
-</section><section><div class="language-grid" dir="rtl">
-  <div class="language-grid__a"></div>
-  <div class="language-grid__b"></div>
-  <div class="language-grid__c"></div>
-  <div class="language-grid__d"></div>
-  <div class="language-grid__e"></div>
-</div>
-</section><section><div class="language-grid" style="writing-mode:vertical-lr">
-  <div class="language-grid__a"></div>
-  <div class="language-grid__b"></div>
-  <div class="language-grid__c"></div>
-  <div class="language-grid__d"></div>
-  <div class="language-grid__e"></div>
-</div>
+<column-code>1fr 12em 8em 1fr</column-code>
 </section><section><h4><code>grid-template-rows</code></h4>
 <p class="fragment">Set the pro­por­tions for tracks along the <em>block axis</em> of the grid con­tainer</p>
 <p class="fragment">Value: a se­ries of valid length val­ues</p>
@@ -137,11 +111,38 @@
 </section><section><h4><em><span class="small-caps">🚨</span> Warning: Fixed Heights <span class="small-caps">🚨</span></em></h4>
 <p>Fixed heights =&gt; over­ﬂow</p>
 <p>Flexible row height val­ues: <code>auto</code>, <code>min-content</code>, <code>max-content</code></p>
+</section><section><h3>Logical Properties</h3>
+<p><em>Inline:</em> start to end of a <em>line</em> of text <em>in</em> the block</p>
+<p><em>Block:</em> start to end of the <em>block</em> of text</p>
+</section><section><code>dir=ltr</code>
+<div class="language-grid">
+  <div class="language-grid__a">Start</div>
+  <div class="language-grid__b"></div>
+  <div class="language-grid__c"></div>
+  <div class="language-grid__d"></div>
+  <div class="language-grid__e"></div>
+</div>
+</section><section><code>dir=rtl</code>
+<div class="language-grid" dir="rtl">
+  <div class="language-grid__a">Start</div>
+  <div class="language-grid__b"></div>
+  <div class="language-grid__c"></div>
+  <div class="language-grid__d"></div>
+  <div class="language-grid__e"></div>
+</div>
+</section><section><code>writing-mode: vertical-lr</code>
+<div class="language-grid" style="writing-mode:vertical-lr">
+  <div class="language-grid__a">Start</div>
+  <div class="language-grid__b"></div>
+  <div class="language-grid__c"></div>
+  <div class="language-grid__d"></div>
+  <div class="language-grid__e"></div>
+</div>
 </section><section><h4><code>grid-template-areas</code></h4>
 <ul>
-<li class="fragment">Assign names to grid ar­eas</li>
-<li class="fragment">White space does­n’t mat­ter</li>
-<li class="fragment"><code>.</code> cre­ates a<span class="push-double"></span> <span class="pull-double">“</span>blank” area</li>
+<li>Assign names to grid ar­eas</li>
+<li>White space does­n’t mat­ter</li>
+<li><code>.</code> cre­ates a<span class="push-double"></span> <span class="pull-double">“</span>blank” area</li>
 </ul>
 </section><section><h4><code>grid-template-areas</code></h4>
 <pre><code class="language-css" data-no-escape>.grid {
@@ -173,10 +174,10 @@
 }</code></pre>
 </section><section><h4><code>gap</code></h4>
 <ul>
-<li class="fragment">Creates gaps be­tween columns and rows</li>
-<li class="fragment">Formerly called <code>grid-gap</code></li>
-<li class="fragment">Shorthand: <code>row-gap column-gap</code></li>
-<li class="fragment"><code>gap: 20px 30px</code></li>
+<li>Creates gaps be­tween columns and rows</li>
+<li>Formerly called <code>grid-gap</code></li>
+<li>Shorthand: <code>row-gap column-gap</code></li>
+<li><code>gap: 20px 30px</code></li>
 </ul>
 </section><section><h3 class="big v-tilt v-tilt--large">Grid<br><em>Container</em><br><em>Values</em></h3>
 </section><section><h4><code>fr</code></h4>
@@ -191,7 +192,9 @@
 <p class="step fragment"></p>
 <p class="step fragment"></p>
 <p class="step fragment"></p>
+
 <div class="fr-label"></div>
+
 <div class="fr-demo">
   <header class="fr-demo__header">Header</header>
   <main class="fr-demo__main">Main Content</main>
@@ -442,72 +445,6 @@ align-items: center;</code></pre>
      1fr 1fr 1fr 1fr;
   gap: 10px;
 }</code></pre>
-</section><section><div class="image-grid">
-  <span class="image-grid__center">
-    <span>i1</span>
-    <span>i1</span>
-    <span>i1</span>
-    <span>i1</span>
-    <span>i1</span>
-    <span>i1</span>
-    <span>i1</span>
-    <span>i1</span>
-    <span>i1</span>
-  </span>
-  <span>i2</span>
-  <span>i3</span>
-  <span>i4</span>
-  <span>i5</span>
-  <span>i6</span>
-  <span>i7</span>
-  <span>i8</span>
-  <span>i9</span>
-  <span>i10</span>
-  <span>i11</span>
-  <span>i12</span>
-  <span>i13</span>
-  <span>i14</span>
-  <span>i15</span>
-  <span>i16</span>
-  <span>i17</span>
-  <span>i18</span>
-  <span>i19</span>
-  <span>i20</span>
-  <span>i21</span>
-  <span>i22</span>
-  <span>i23</span>
-  <span>i24</span>
-  <span>i25</span>
-  <span>i26</span>
-  <span>i27</span>
-  <span>i28</span>
-  <span>i29</span>
-  <span>i30</span>
-  <span>i31</span>
-  <span>i32</span>
-  <span>i33</span>
-  <span>i34</span>
-  <span>i35</span>
-  <span>i36</span>
-  <span>i37</span>
-  <span>i38</span>
-  <span>i39</span>
-  <span>i40</span>
-  <span>i41</span>
-</div>
-</section><section><pre><code class="language-css" data-no-escape>.image-grid {
-  grid-template:
-    "i35 i36 i37 i38 i39 i40 i41" 1fr
-    "i34 i13 i14 i15 i16 i17 i18" 1fr
-    "i33 i12 <mark> i1  i1  i1 </mark> i2 i19" 1fr
-    "i32 i11 <mark> i1  i1  i1 </mark> i3 i20" 1fr
-    "i31 i10 <mark> i1  i1  i1 </mark> i4 i21" 1fr
-    "i30  i9  i8  i7  i6  i5 i22" 1fr
-    "i29 i28 i27 i26 i25 i24 i23" 1fr /
-     1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  gap: 10px;
-}
-</code></pre>
 </section></section><section><section><h2 class="big v-tilt v-tilt--large">
   <em>Tips,</em><br>Tricks &<br><em>Gotchas</em>
 </h2>
@@ -525,7 +462,15 @@ not its in­trin­sic as­pect ra­tio</p>
 <p>Fallback lay­out <span class="small-caps">CSS</span> (if pos­si­ble)</p>
 <p>Autopreﬁxer can help (if nec­es­sary)</p>
 <p>No <code>gap</code> sup­port</p>
-</section></section><section><section><h2 class>James Steinbach</h2>
+</section></section><section><section><h2>Resources</h2>
+<ul>
+  <li><a rel="noreferrer noopener nofollow" target="_blank" href="https://developer.mozilla.org/en-US/docs/Glossary/Grid"><span class="small-caps">MDN</span>: Grid</a>, <a rel="noreferrer noopener nofollow" target="_blank" href="https://css-tricks.com/snippets/css/complete-guide-grid/">CSS-Tricks</a>, <a rel="noreferrer noopener nofollow" target="_blank" href="https://cssgridgarden.com/">Grid Garden</a></li>
+  <li>Rachel Andrew: <a rel="noreferrer noopener nofollow" target="_blank" href="https://rachelandrew.co.uk/css/cheatsheets/box-alignment">Box Alignment</a>, <a rel="noreferrer noopener nofollow" target="_blank" href="https://gridbyexample.com/">Grid by Example</a>, <a rel="noreferrer noopener nofollow" target="_blank" href="https://abookapart.com/products/the-new-css-layout">The New <span class="small-caps">CSS</span> Layout</a></li>
+  <li>Jen Simmons: <a rel="noreferrer noopener nofollow" target="_blank" href="https://www.youtube.com/channel/UC7TizprGknbDalbHplROtag">Layout Land</a>, <a rel="noreferrer noopener nofollow" target="_blank" href="https://labs.jensimmons.com/">Web Design Experiments</a>, <a rel="noreferrer noopener nofollow" target="_blank" href="https://labs.jensimmons.com/2017/workshop/">Grid Layout Examples</a></li>
+  <li><a rel="noreferrer noopener nofollow" target="_blank" href="https://codepen.io/collection/XqjeaM/">CodePen Grid Collection</a></li>
+  <li><a rel="noreferrer noopener nofollow" target="_blank" href="https://www.gridtoflex.com/">Flexbox Fallbacks for Grid Layouts</a></li>
+</ul>
+</section><section><h2 class>James Steinbach</h2>
 <h3 class="mb-2">Senior <span class="small-caps">UX</span> Developer<br> at <a rel="noreferrer noopener nofollow" target="_blank" href="https://dockyard.com/blog/authors/james-steinbach">DockYard</a><svg viewbox="0 0 1023 1024" class="logo--dockyard" fill="var(--dyColor)"><path d="M511.413 0c-282.422 0-511.413 228.991-511.413 512 0 282.422 228.991 511.413 511.413 511.413s511.413-228.991 511.413-511.413c0.587-283.009-228.404-512-511.413-512zM808.514 202.569c0 1.761-1.761 4.697-5.284 8.807-9.394 10.569-110.972 123.89-148.55 162.642 16.44 42.275 16.44 115.083 10.569 185.541-8.22 99.229-21.138 139.156-75.156 169.688s-201.982 34.642-275.963 16.44c-73.982-18.202-83.376-92.183-90.422-95.119-28.771-12.33-25.248-58.128-25.248-58.128 20.55-1.174 40.514 24.073 40.514 24.073 8.22-12.917 32.294-25.248 32.294-25.248 11.156 39.339-12.33 52.844-9.982 58.128 5.872 14.679 37.578 49.908 87.486 24.073 49.908-25.248 51.67-94.532 54.606-179.67s25.248-153.248 98.642-169.688c56.367-12.33 96.881 1.761 115.083 10.569 50.495-36.991 165.578-119.193 175.56-126.239 4.697-2.936 8.22-5.284 10.569-6.459h5.284c0 0 0 0 0 0.587v0z"/><path d="M473.835 577.174c-16.44 22.899-21.138 44.037-31.706 69.284-8.807 19.963-23.486 29.358-34.642 45.798-9.394 14.092 20.55 18.789 28.771 19.376 21.725.587 45.798-10.569 58.716-27.596 17.615-24.073 19.376-46.972 31.706-72.22 6.459-13.505 26.422-39.339 27.596-51.67 2.936-23.486-56.367-16.44-80.44 17.028zM532.55 392.807c-11.743 4.11-18.202 16.44-14.092 28.183 3.523 11.743 16.44 18.202 27.596 14.092 11.743-4.11 18.202-16.44 14.092-28.183-3.523-11.156-16.44-17.615-27.596-14.092z"/></svg></h3>
 <h2 class><code>jdsteinbach</code></h2>
 <h3><a rel="noreferrer noopener nofollow" target="_blank" href="https://twitter.com/jdsteinbach">Twitter</a> | <a rel="noreferrer noopener nofollow" target="_blank" href="https://github.com/jdsteinbach">Github</a> | <a href="https://jdsteinbach.com">Blog</a></h3>

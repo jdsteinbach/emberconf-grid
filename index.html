@@ -1,0 +1,571 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>An Ember Dev's Guide to CSS Grid</title>
+    <meta name="description" content="Slide Deck for EmberConf 2020 talk by James Steinbach">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./style.min.css">
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides" id="slides">
+        <section><section><h1 class="v-tilt v-tilt--large big">An Ember Dev&apos;s<br>Guide to<br><em><span class="small-caps">CSS</span> Grid</em></h1>
+</section><section><h2>Grid gives us</h2>
+<ul>
+<li>a re­spon­sive CSS-only lay­out method</li>
+<li>that re­quires only <code>grid</code> styles,</li>
+<li>al­lows col­umn/​​row/​​gap con­trol, and</li>
+<li>can put chil­dren at any col­umn/​​row po­si­tion</li>
+</ul>
+</section><section><h3>Grid Properties &amp; Values</h3>
+<div class="grid-properties grid-properties--small">
+<p><code>grid-template-columns</code></p>
+<p><code>grid-template-rows</code></p>
+<p><code>grid-template-areas</code></p>
+<p><code>grid-template</code></p>
+<p><code>grid-auto-columns</code></p>
+<p><code>grid-auto-rows</code></p>
+<p><code>grid</code></p>
+<p><code>gap</code></p>
+<p><code>justify-content</code></p>
+<p><code>justify-items</code></p>
+<p><code>align-content</code></p>
+<p><code>align-items</code></p>
+<hr>
+<p><code>fr</code></p>
+<p><code>min-content</code></p>
+<p><code>max-content</code></p>
+<p><code>fit-content()</code></p>
+<p><code>repeat()</code></p>
+<p><code>minmax()</code></p>
+<p><code>auto-fit</code></p>
+<p><code>auto-fill</code></p>
+<p><code>span</code></p>
+<hr>
+<p><code>grid-column-start</code></p>
+<p><code>grid-column-end</code></p>
+<p><code>grid-column</code></p>
+<p><code>grid-row-start</code></p>
+<p><code>grid-row-end</code></p>
+<p><code>grid-row</code></p>
+<p><code>grid-area</code></p>
+<p><code>order</code></p>
+<p><code>align-self</code></p>
+<p><code>justify-self</code></p>
+</div>
+</section><section data-background="images/hard-road.jpg"></section><section><h3>Today’s Grid Properties &amp; Values</h3>
+<div class="grid-properties">
+<p><code>grid-template-columns</code></p>
+<p><code>grid-template-rows</code></p>
+<p><code>grid-template-areas</code></p>
+<p><code>gap</code></p>
+<hr>
+<p><code>fr</code></p>
+<p><code>repeat()</code></p>
+<hr>
+<p><code>grid-area</code></p>
+</div>
+</section><section data-background="images/easy-road.jpg"></section></section><section><section><div class="v-tilt v-tilt--large">
+  <h2 class="big"><em>Grid</em><br>The Short,<br>Happy Path</h2>
+</div>
+</section><section><pre><code class="language-css" data-no-escape>.site {
+  display: grid;
+  grid-template-columns: 1fr 40em 20em 1fr;
+  grid-template-areas:
+    "<mark class="alt">header header  header  header</mark>"
+    "  .    content sidebar    .  "
+    "<mark>footer footer  footer  footer</mark>";
+  gap: 12px 16px;
+}</code></pre>
+</section><section><pre><code class="language-css">.site__header {
+  grid-area: header;
+}
+.site__main {
+  grid-area: content;
+}
+.site__aside {
+  grid-area: sidebar;
+}
+.site__footer {
+  grid-area: footer;
+}
+</code></pre>
+</section><section><h3 class="big v-tilt v-tilt--large">Grid<br><em>Container</em><br><em>Properties</em></h3>
+</section><section><h4><code>grid-template-columns</code></h4>
+<p class="fragment">Set the pro­por­tions for tracks along the <em>in­line axis</em> of the grid con­tainer</p>
+<p class="fragment">Value: a se­ries of valid length val­ues</p>
+</section><section><div></div>
+<column-code>30% 150px 30%</column-code>
+<column-code>1fr 12em 8em 1fr</column-code>
+</section><section><h4><code>grid-template-rows</code></h4>
+<p class="fragment">Set the pro­por­tions for tracks along the <em>block axis</em> of the grid con­tainer</p>
+<p class="fragment">Value: a se­ries of valid length val­ues</p>
+</section><section><div style="min-height:30rem">
+  <row-code>1fr 2fr</row-code>
+</div>
+</section><section><div style="min-height:30rem">
+  <row-code override="50px repeat(10,&nbsp;100px)">50px re­peat(10,&nbsp;100px)</row-code>
+</div>
+</section><section><h4><em><span class="small-caps">🚨</span> Warning: Fixed Heights <span class="small-caps">🚨</span></em></h4>
+<p>Fixed heights =&gt; over­ﬂow</p>
+<p>Flexible row height val­ues: <code>auto</code>, <code>min-content</code>, <code>max-content</code></p>
+</section><section><h3>Logical Properties</h3>
+<p><em>Inline:</em> start to end of a <em>line</em> of text <em>in</em> the block</p>
+<p><em>Block:</em> start to end of the <em>block</em> of text</p>
+</section><section><code>dir=ltr</code>
+<div class="language-grid">
+  <div class="language-grid__a">Start</div>
+  <div class="language-grid__b"></div>
+  <div class="language-grid__c"></div>
+  <div class="language-grid__d"></div>
+  <div class="language-grid__e"></div>
+</div>
+</section><section><code>dir=rtl</code>
+<div class="language-grid" dir="rtl">
+  <div class="language-grid__a">Start</div>
+  <div class="language-grid__b"></div>
+  <div class="language-grid__c"></div>
+  <div class="language-grid__d"></div>
+  <div class="language-grid__e"></div>
+</div>
+</section><section><code>writing-mode: vertical-lr</code>
+<div class="language-grid" style="writing-mode:vertical-lr">
+  <div class="language-grid__a">Start</div>
+  <div class="language-grid__b"></div>
+  <div class="language-grid__c"></div>
+  <div class="language-grid__d"></div>
+  <div class="language-grid__e"></div>
+</div>
+</section><section><h4><code>grid-template-areas</code></h4>
+<ul>
+<li>Assign names to grid ar­eas</li>
+<li>White space does­n’t mat­ter</li>
+<li><code>.</code> cre­ates a<span class="push-double"></span> <span class="pull-double">“</span>blank” area</li>
+</ul>
+</section><section><h4><code>grid-template-areas</code></h4>
+<pre><code class="language-css" data-no-escape>.grid {
+  grid-template-areas:
+    "<mark class="alt">header header header  header</mark>"
+    ".      body   sidebar .     "
+    "<mark>footer footer footer  footer</mark>";
+}</code></pre>
+</section><section><h4><code>grid-template-areas</code></h4>
+<pre><code class="language-css">.grid {
+  grid-template-areas:
+    &quot;👱‍♀️ 👱‍♀️ 👱‍♀️ 👱‍♀️&quot;
+    &quot;.  📄 📶 . &quot;
+    &quot;🦶 🦶 🦶 🦶&quot;;
+}
+</code></pre>
+</section><section><h4><code>grid-template-areas</code></h4>
+<p>One rec­tan­gle</p>
+<p>Adjacent cells</p>
+<p>Strings, not in­te­gers</p>
+</section><section><h4><span class="small-caps">BONUS</span>! <code>grid-template</code></h4>
+<p class="fragment">Assign rows, columns, and ar­eas</p>
+<pre class="fragment"><code class="css">.grid {
+  grid-template:
+    "<mark class="alt">header header header  header</mark>" auto
+    ".      body   sidebar .     " auto
+    "<mark>footer footer footer  footer</mark>" auto /
+     1fr    40em   20em    1fr;
+}</code></pre>
+</section><section><h4><code>gap</code></h4>
+<ul>
+<li>Creates gaps be­tween columns and rows</li>
+<li>Formerly called <code>grid-gap</code></li>
+<li>Shorthand: <code>row-gap column-gap</code></li>
+<li><code>gap: 20px 30px</code></li>
+</ul>
+</section><section><h3 class="big v-tilt v-tilt--large">Grid<br><em>Container</em><br><em>Values</em></h3>
+</section><section><h4><code>fr</code></h4>
+<p class="fragment">One<span class="push-double"></span> <span class="pull-double">&ldquo;</span><span class="t-emphasis">fr</span>ac­tion&rdquo; of the grid&rsquo;s <span class="t-emphasis">fr</span>ee space</p>
+<p class="fragment">Calculated af­ter non-<code>fr</code><br>space is used</p>
+<p class="fragment">Based on to­tal num­ber of <code>fr</code><br>in the row or col­umn</p>
+</section><section><div></div>
+<column-code>300px 1fr</column-code>
+<column-code>1fr 12em 8em 1fr</column-code>
+<column-code>1fr 2fr 3fr</column-code>
+</section><section><p class="step fragment"></p>
+<p class="step fragment"></p>
+<p class="step fragment"></p>
+<p class="step fragment"></p>
+
+<div class="fr-label"></div>
+
+<div class="fr-demo">
+  <header class="fr-demo__header">Header</header>
+  <main class="fr-demo__main">Main Content</main>
+  <aside class="fr-demo__aside">Sidebar</aside>
+  <footer class="fr-demo__footer">Footer</footer>
+</div>
+</section><section><h4><code>repeat()</code></h4>
+<p class="fragment">Repeats a cer­tain value a spec­i­ﬁed num­ber of times</p>
+<p class="fragment"><code>repeat(&lt;count&gt;, &lt;length&gt;)</code></p>
+<p class="fragment"><code>repeat(12, 1fr)</code></p>
+<column-code class="fragment" override="1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr">re­peat(12, 1fr)</column-code>
+</section><section><h3 class="big v-tilt v-tilt--large">Grid<br><em>Child</em><br><em>Properties</em></h3>
+</section><section><h4><code>grid-area</code></h4>
+<p class="fragment">Values:</p>
+<ul>
+  <li class="fragment">A <code>grid-template-areas</code> name</li>
+  <li class="fragment">Shorthand for <br><code>row-start / column-start / row-end / column-end</code></li>
+</ul>
+</section><section><h3 class="big v-tilt v-tilt--large" data-autoslide="0">
+  <em class="a-blast-in fragment" data-autoslide="500">Congrats!</em><br>
+  <span class="a-blast-in fragment">You know<br>Grid!</span>
+</h3>
+</section></section><section><section><h2 class="big v-tilt v-tilt--large"><em>Practical</em><br>Grid<br><em>Examples</em></h2>
+</section><section><div class="centered">
+  <pre class="centered__div"><code class="language-css" data-no-escape>display: grid;
+justify-content: center;
+align-items: center;</code></pre>
+</div>
+</section><section><div class="data-rows">
+  <div class="data-row">
+    <div class="data-row__title">Sample Post Title</div>
+    <div class="data-row__date">April 10, 2019</div>
+    <div class="data-row__actions">
+      <a class="action action--edit">Edit</a>
+      <a class="action action--delete">Delete</a>
+      <a class="action action--publish">Publish</a>
+    </div>
+    <span class="data-row__status data-row__status--draft">Draft</span>
+  </div>
+  <div class="data-row">
+    <div class="data-row__title">Sample Post Title</div>
+    <div class="data-row__date">April 3, 2019</div>
+    <div class="data-row__actions">
+      <a class="action action--edit">Edit</a>
+      <a class="action action--delete">Delete</a>
+      <a class="action action--publish">Publish</a>
+    </div>
+    <span class="data-row__status">Published</span>
+  </div>
+  <div class="data-row">
+    <div class="data-row__title">Sample Post Title</div>
+    <div class="data-row__date">March 25, 2019</div>
+    <div class="data-row__actions">
+      <a class="action action--edit">Edit</a>
+      <a class="action action--delete">Delete</a>
+      <a class="action action--publish">Publish</a>
+    </div>
+    <span class="data-row__status">Published</span>
+  </div>
+  <div class="data-row">
+    <div class="data-row__title">Sample Post Title</div>
+    <div class="data-row__date">March 2, 2019</div>
+    <div class="data-row__actions">
+      <a class="action action--edit">Edit</a>
+      <a class="action action--delete">Delete</a>
+      <a class="action action--publish">Publish</a>
+    </div>
+    <span class="data-row__status data-row__status--private">Private</span>
+  </div>
+  <div class="data-row">
+    <div class="data-row__title">Sample Post Title</div>
+    <div class="data-row__date">February 19, 2019</div>
+    <div class="data-row__actions">
+      <a class="action action--edit">Edit</a>
+      <a class="action action--delete">Delete</a>
+      <a class="action action--publish">Publish</a>
+    </div>
+    <span class="data-row__status">Published</span>
+  </div>
+</div>
+</section><section><pre><code class="language-css">.row {
+  display: grid;
+  grid-template:
+    &quot;title   date&quot;   auto
+    &quot;actions status&quot; auto /
+     1fr     max-content;
+  gap: .5rem;
+}
+</code></pre>
+</section><section><div class="employee">
+  <div class="employee__photo">
+    <img src="http://i.pravatar.cc/400?img=49" alt>
+  </div>
+  <header class="employee__header">
+    <div class="employee__title">Rita Matthews</div>
+    <div class="employee__subtitle">District Manager</div>
+    <div class="employee__contact">
+      <a href>rita.matthews@ex­am­ple.com</a>
+      <span>(555) 555-6789</span>
+    </div>
+  </header>
+  <div class="employee__bio">Rita has been man­ag­ing this dis­trict for 3 years. When she’s not work­ing, she spends time on a bunch of cool hob­bies.</div>
+  <div class="employee__awards">
+    <div class="awards-title">Awards</div>
+    <li class="award">Highest Revenue Increase</li>
+    <li class="award">Most Exciting Screensaver</li>
+    <li class="award">Coolest Hobbies</li>
+    <li class="award">Best Voicemail Message</li>
+    <li class="award">Strongest Team Player</li>
+    <li class="award">Most Reﬂective Sunglasses</li>
+  </div>
+</div>
+</section><section><pre><code class="language-css" data-no-escape>.employee {
+  display: grid;
+  grid-template:
+    "<mark>photo</mark> header" auto
+    "<mark>photo</mark> <mark class="alt">awards</mark>" auto
+    "bio   <mark class="alt">awards</mark>" auto /
+     30%   1fr;
+  gap: 1rem 3rem;
+}</code></pre>
+</section><section><div class="employee">
+  <div class="employee__photo">
+    <img src="http://i.pravatar.cc/400?img=49" alt>
+  </div>
+  <header class="employee__header">
+    <div class="employee__title">Rita Matthews</div>
+    <div class="employee__subtitle">District Manager</div>
+    <div class="employee__contact">
+      <a href>rita.matthews@ex­am­ple.com</a>
+      <span>(555) 555-6789</span>
+    </div>
+  </header>
+  <div class="employee__bio">Rita has been man­ag­ing this dis­trict for 3 years. When she’s not work­ing, she spends time on a bunch of cool hob­bies.</div>
+  <div class="employee__awards">
+    <div class="awards-title">Awards</div>
+    <li class="award">Highest Revenue Increase</li>
+    <li class="award">Most Exciting Screensaver</li>
+    <li class="award">Coolest Hobbies</li>
+    <li class="award">Best Voicemail Message</li>
+    <li class="award">Strongest Team Player</li>
+    <li class="award">Most Reﬂective Sunglasses</li>
+  </div>
+  <span>photo</span>
+  <span>photo</span>
+  <span>bio</span>
+  <span>header</span>
+  <span>awards</span>
+  <span>awards</span>
+</div>
+</section><section><div class="employee employee--2">
+  <div class="employee__photo">
+    <img src="http://i.pravatar.cc/400?img=49" alt>
+  </div>
+  <header class="employee__header">
+    <div class="employee__title">Rita Matthews</div>
+    <div class="employee__subtitle">District Manager</div>
+    <div class="employee__contact">
+      <a href>rita.matthews@ex­am­ple.com</a>
+      <span>(555) 555-6789</span>
+    </div>
+  </header>
+  <div class="employee__bio">Rita has been man­ag­ing this dis­trict for 3 years. When she’s not work­ing, she spends time on a bunch of cool hob­bies.</div>
+  <div class="employee__awards">
+    <div class="awards-title">Awards</div>
+    <li class="award">Highest Revenue Increase</li>
+    <li class="award">Most Exciting Screensaver</li>
+    <li class="award">Coolest Hobbies</li>
+    <li class="award">Best Voicemail Message</li>
+    <li class="award">Strongest Team Player</li>
+    <li class="award">Most Reﬂective Sunglasses</li>
+  </div>
+</div>
+</section><section><pre><code class="language-css" data-no-escape>.employee {
+  grid-template:
+    "photo  header" auto
+    "<mark>bio    bio   </mark>" auto
+    "<mark class="alt">awards awards</mark>" auto /
+     150px  1fr;
+  gap: 1rem;
+}</code></pre>
+</section><section><div class="employee employee--3">
+  <div class="employee__photo">
+    <img src="http://i.pravatar.cc/400?img=49" alt>
+  </div>
+  <header class="employee__header">
+    <div class="employee__title">Rita Matthews</div>
+    <div class="employee__subtitle">District Manager</div>
+    <div class="employee__contact">
+      <a href>rita.matthews@ex­am­ple.com</a>
+      <span>(555) 555-6789</span>
+    </div>
+  </header>
+  <div class="employee__bio">Rita has been man­ag­ing this dis­trict for 3 years. When she’s not work­ing, she spends time on a bunch of cool hob­bies.</div>
+  <div class="employee__awards">
+    <div class="awards-title">Awards</div>
+    <li class="award">Highest Revenue Increase</li>
+    <li class="award">Most Exciting Screensaver</li>
+    <li class="award">Coolest Hobbies</li>
+    <li class="award">Best Voicemail Message</li>
+    <li class="award">Strongest Team Player</li>
+    <li class="award">Most Reﬂective Sunglasses</li>
+  </div>
+</div>
+</section><section><pre><code class="language-css">.employee {
+  grid-template:
+    &quot;photo&quot; auto
+    &quot;header&quot; auto /
+     1fr;
+}
+
+.employee__awards,
+.employee__bio {
+  display: none;
+}
+</code></pre>
+</section><section><div class="image-grid-2">
+  <span class="image-grid__inner" style="--rowspan:2;--colspan:2">
+    <span>i1</span>
+    <span>i1</span>
+    <span>i1</span>
+    <span>i1</span>
+  </span>
+  <span>i2</span>
+  <span class="image-grid__inner" style="--rowspan:2">
+    <span>i3</span>
+    <span>i3</span>
+  </span>
+  <span class="image-grid__inner" style="--rowspan:2">
+    <span>i4</span>
+    <span>i4</span></span>
+  <span>i5</span>
+  <span class="image-grid__inner" style="--rowspan:2">
+    <span>i6</span>
+    <span>i6</span></span>
+  <span>i7</span>
+  <span class="image-grid__inner" style="--colspan:2">
+    <span>i8</span>
+    <span>i8</span></span>
+  <span>i9</span>
+</div>
+</section><section><pre><code class="language-css" data-no-escape>.image-grid {
+  grid-template:
+    " <mark class="alt">i1  i1</mark>  i2  <mark>i3</mark>" 1fr
+    " <mark class="alt">i1  i1</mark>  <mark>i4</mark>  <mark>i3</mark>" 1fr
+    " <mark>i6</mark>  i7  <mark>i4</mark>  i5" 1fr
+    " <mark>i6</mark>  <mark class="alt">i8  i8</mark>  i9" 1fr /
+     1fr 1fr 1fr 1fr;
+  gap: 10px;
+}</code></pre>
+</section></section><section><section><h2 class="big v-tilt v-tilt--large">
+  <em>Tips,</em><br>Tricks &<br><em>Gotchas</em>
+</h2>
+</section><section><h3>Image Sizes</h3>
+<p><code>img</code> as­signed to a <code>grid-area</code> obeys the grid cell size,
+not its in­trin­sic as­pect ra­tio</p>
+<p>Wrap im­ages in a con­tainer el­e­ment</p>
+</section><section><h3>Animating Grids</h3>
+<p>Some browsers an­i­mate</p>
+<p><code>grid-template-columns</code></p>
+<p><code>grid-template-rows</code></p>
+<p><code>gap</code></p>
+<p>Can’t an­i­mate el­e­ments be­tween ar­eas</p>
+</section><section><h3><span class="small-caps">IE</span> 11</h3>
+<p>Fallback lay­out <span class="small-caps">CSS</span> (if pos­si­ble)</p>
+<p>Autopreﬁxer can help (if nec­es­sary)</p>
+<p>No <code>gap</code> sup­port</p>
+</section></section><section><section><h2>Resources</h2>
+<ul>
+  <li><a rel="noreferrer noopener nofollow" target="_blank" href="https://developer.mozilla.org/en-US/docs/Glossary/Grid"><span class="small-caps">MDN</span>: Grid</a>, <a rel="noreferrer noopener nofollow" target="_blank" href="https://css-tricks.com/snippets/css/complete-guide-grid/">CSS-Tricks</a>, <a rel="noreferrer noopener nofollow" target="_blank" href="https://cssgridgarden.com/">Grid Garden</a></li>
+  <li>Rachel Andrew: <a rel="noreferrer noopener nofollow" target="_blank" href="https://rachelandrew.co.uk/css/cheatsheets/box-alignment">Box Alignment</a>, <a rel="noreferrer noopener nofollow" target="_blank" href="https://gridbyexample.com/">Grid by Example</a>, <a rel="noreferrer noopener nofollow" target="_blank" href="https://abookapart.com/products/the-new-css-layout">The New <span class="small-caps">CSS</span> Layout</a></li>
+  <li>Jen Simmons: <a rel="noreferrer noopener nofollow" target="_blank" href="https://www.youtube.com/channel/UC7TizprGknbDalbHplROtag">Layout Land</a>, <a rel="noreferrer noopener nofollow" target="_blank" href="https://labs.jensimmons.com/">Web Design Experiments</a>, <a rel="noreferrer noopener nofollow" target="_blank" href="https://labs.jensimmons.com/2017/workshop/">Grid Layout Examples</a></li>
+  <li><a rel="noreferrer noopener nofollow" target="_blank" href="https://codepen.io/collection/XqjeaM/">CodePen Grid Collection</a></li>
+  <li><a rel="noreferrer noopener nofollow" target="_blank" href="https://www.gridtoflex.com/">Flexbox Fallbacks for Grid Layouts</a></li>
+</ul>
+</section><section><h2 class>James Steinbach</h2>
+<h3 class="mb-2">Senior <span class="small-caps">UX</span> Developer<br> at <a rel="noreferrer noopener nofollow" target="_blank" href="https://dockyard.com/blog/authors/james-steinbach">DockYard</a><svg viewbox="0 0 1023 1024" class="logo--dockyard" fill="var(--dyColor)"><path d="M511.413 0c-282.422 0-511.413 228.991-511.413 512 0 282.422 228.991 511.413 511.413 511.413s511.413-228.991 511.413-511.413c0.587-283.009-228.404-512-511.413-512zM808.514 202.569c0 1.761-1.761 4.697-5.284 8.807-9.394 10.569-110.972 123.89-148.55 162.642 16.44 42.275 16.44 115.083 10.569 185.541-8.22 99.229-21.138 139.156-75.156 169.688s-201.982 34.642-275.963 16.44c-73.982-18.202-83.376-92.183-90.422-95.119-28.771-12.33-25.248-58.128-25.248-58.128 20.55-1.174 40.514 24.073 40.514 24.073 8.22-12.917 32.294-25.248 32.294-25.248 11.156 39.339-12.33 52.844-9.982 58.128 5.872 14.679 37.578 49.908 87.486 24.073 49.908-25.248 51.67-94.532 54.606-179.67s25.248-153.248 98.642-169.688c56.367-12.33 96.881 1.761 115.083 10.569 50.495-36.991 165.578-119.193 175.56-126.239 4.697-2.936 8.22-5.284 10.569-6.459h5.284c0 0 0 0 0 0.587v0z"/><path d="M473.835 577.174c-16.44 22.899-21.138 44.037-31.706 69.284-8.807 19.963-23.486 29.358-34.642 45.798-9.394 14.092 20.55 18.789 28.771 19.376 21.725.587 45.798-10.569 58.716-27.596 17.615-24.073 19.376-46.972 31.706-72.22 6.459-13.505 26.422-39.339 27.596-51.67 2.936-23.486-56.367-16.44-80.44 17.028zM532.55 392.807c-11.743 4.11-18.202 16.44-14.092 28.183 3.523 11.743 16.44 18.202 27.596 14.092 11.743-4.11 18.202-16.44 14.092-28.183-3.523-11.156-16.44-17.615-27.596-14.092z"/></svg></h3>
+<h2 class><code>jdsteinbach</code></h2>
+<h3><a rel="noreferrer noopener nofollow" target="_blank" href="https://twitter.com/jdsteinbach">Twitter</a> | <a rel="noreferrer noopener nofollow" target="_blank" href="https://github.com/jdsteinbach">Github</a> | <a href="https://jdsteinbach.com">Blog</a></h3>
+</section></section>
+      </div>
+
+      <div class="colophon">
+        <img src="./images/emberconf-logo.svg" alt="EmberConf 2020" class="colophon__logo">
+        <a class="colophon__link" href="https://jdsteinbach.com/emberconf-grid">jds.li/embergrid</a>
+      </div>
+    </div>
+
+    <script src="//cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script type="text/javascript" src="./index.min.js"></script>
+    <script>
+      Vue.component('column-code', {
+        data() {
+          return {}
+        },
+        props: {
+          override: {
+            type: String,
+            default: ''
+          }
+        },
+        computed: {
+          templateColumns() {
+            return this.override || this.$slots.default[0].text
+          },
+          columns() {
+            if (!this.templateColumns) {
+              return '<span>No Content Available</span>'
+            }
+            return this.templateColumns.split(' ')
+          },
+          columnStyle() {
+            return {
+              '--columns': this.templateColumns
+            }
+          }
+        },
+        template: '<code class="column-code fragment" :class="{override: override}" :style="columnStyle"><span v-if="override" class="preoverride"><slot/></span><span v-for="(col, i) in columns" :key="`${i}-${col}`" :data-key="`${i}-${col}`">{{col}}</span></code>'
+      })
+
+      Vue.component('row-code', {
+        data() {
+          return {}
+        },
+        props: {
+          override: {
+            type: String,
+            default: ''
+          }
+        },
+        computed: {
+          templateRows() {
+            return this.override || this.$slots.default[0].text
+          },
+          rows() {
+            if (!this.templateRows) {
+              return '<span>No Content Available</span>'
+            }
+            const splitRows = this.templateRows.split(' ')
+            const outputRows = []
+            splitRows.map(r => {
+              if (r.indexOf('r') === 0) {
+                r = r.replace('&nbsp;', ' ')
+                const matches = r.match(/\((.*?),/)
+                console.log(r, matches)
+                const [ original, count ] = matches
+                for(let i = 0; i < count; i++) {
+                  if (i === 0) {
+                    outputRows.push(r)
+                  } else {
+                    outputRows.push('')
+                  }
+                }
+              } else {
+                outputRows.push(r)
+              }
+            })
+            return outputRows
+          },
+          rowStyle() {
+            return {
+              '--rows': this.templateRows.replace('&nbsp;', ' ')
+            }
+          }
+        },
+        template: '<code class="row-code fragment" :style="rowStyle"><span v-for="(row, i) in rows" :key="`${i}-${row}`" :data-key="`${i}-${row}`">{{row}}</span></code>'
+      })
+
+      new Vue({
+        el: '#slides'
+      })
+    </script>
+  </body>
+</html>

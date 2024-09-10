@@ -101,13 +101,13 @@
 }
 
 .employee__subtitle {
-  font-size: (1em / 1.25);
+  font-size: math.div(1em, 1.25);
   opacity: 0.75;
 }
 
 .employee__contact {
   margin-top: 0.5rem;
-  font-size: (1em / 1.75);
+  font-size: math.div(1em, 1.75);
   opacity: 0.75;
 
   a, span {
@@ -118,7 +118,7 @@
 .employee__bio {
   grid-area: bio;
 
-  font-size: (1em / 1.75);
+  font-size: math.div(1em, 1.75);
 }
 
 .employee__awards {
@@ -131,7 +131,7 @@
     margin: 0 0 0 1em;
     padding: 0 0 0 .25em;
     list-style: circle;
-    font-size: (1em / 1.5);
+    font-size: math.div(1em, 1.5);
     opacity: 0.75;
     color: inherit;
   }
@@ -141,5 +141,5 @@
   --font-wght: #{$fontWeightBold};
 
   margin-bottom: 0.5rem;
-  font-size: (1em / 1.25);
+  font-size: math.div(1em, 1.25);
 }
